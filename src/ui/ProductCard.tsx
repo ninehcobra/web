@@ -1,6 +1,8 @@
 'use client';
 
 import { Product } from '@/domain/entities/Product';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire, faTrash, faPenNib, faDownload } from '@fortawesome/free-solid-svg-icons';
 import styles from './ui.module.css';
 
 interface ProductCardProps {
@@ -37,9 +39,12 @@ export default function ProductCard({
                         borderRadius: '4px',
                         fontSize: '0.75rem',
                         fontWeight: 'bold',
-                        color: 'white'
+                        color: 'white',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px'
                     }}>
-                        HOT 🔥
+                        <FontAwesomeIcon icon={faFire} /> HOT
                     </div>
                 )}
             </div>
@@ -66,9 +71,9 @@ export default function ProductCard({
                         <button
                             onClick={() => onSave(product)}
                             className={styles.button}
-                            style={{ flex: 1, background: 'var(--surface-hover)', border: '1px solid var(--primary)', color: 'var(--primary)' }}
+                            style={{ flex: 1, background: 'var(--surface-hover)', border: '1px solid var(--primary)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                         >
-                            Save Product
+                            <FontAwesomeIcon icon={faDownload} /> Save Product
                         </button>
                     ) : (
                         <>
@@ -76,17 +81,17 @@ export default function ProductCard({
                                 <button
                                     onClick={() => onGenerateScript(product)}
                                     className={styles.button}
-                                    style={{ flex: 1, fontSize: '0.875rem', padding: '0.5rem' }}
+                                    style={{ flex: 1, fontSize: '0.875rem', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
                                 >
-                                    Create Script
+                                    <FontAwesomeIcon icon={faPenNib} /> Create Script
                                 </button>
                             )}
                             {onDelete && (
                                 <button
                                     onClick={() => onDelete(product.id)}
-                                    style={{ background: 'transparent', border: '1px solid var(--surface-border)', color: '#ef4444', padding: '0.5rem', borderRadius: '8px', cursor: 'pointer' }}
+                                    style={{ background: 'transparent', border: '1px solid var(--surface-border)', color: '#ef4444', padding: '0.5rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    🗑️
+                                    <FontAwesomeIcon icon={faTrash} />
                                 </button>
                             )}
                         </>

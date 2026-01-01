@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useUploadVideoFileMutation, useSaveVideoMutation } from '@/data/api/videosApi';
 import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import styles from '@/ui/ui.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudArrowUp, faFileVideo } from '@fortawesome/free-solid-svg-icons';
 
 function UploadVideoForm() {
     const router = useRouter();
@@ -55,9 +57,13 @@ function UploadVideoForm() {
                     />
                     <label htmlFor="video-upload" style={{ cursor: 'pointer', display: 'block' }}>
                         {file ? (
-                            <div style={{ color: 'var(--primary)', fontWeight: 'bold' }}>{file.name}</div>
+                            <div style={{ color: 'var(--primary)', fontWeight: 'bold', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                                <FontAwesomeIcon icon={faFileVideo} size="3x" />
+                                {file.name}
+                            </div>
                         ) : (
-                            <div style={{ color: 'var(--text-secondary)' }}>
+                            <div style={{ color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                                <FontAwesomeIcon icon={faCloudArrowUp} size="3x" />
                                 Click to select video file
                                 <br />
                                 <span style={{ fontSize: '0.75rem' }}>(MP4, MOV supported)</span>

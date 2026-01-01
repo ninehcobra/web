@@ -4,6 +4,8 @@ import { useGetScriptsQuery, useDeleteScriptMutation } from '@/data/api/scriptsA
 import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import styles from '@/ui/ui.module.css';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTrash, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 export default function ScriptsPage() {
     const { user } = useAppSelector((state) => state.auth);
@@ -20,8 +22,8 @@ export default function ScriptsPage() {
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h1 className={styles.title} style={{ margin: 0 }}>My Scripts</h1>
-                <Link href="/scripts/create" className={styles.button} style={{ width: 'auto', textDecoration: 'none' }}>
-                    ✨ New Script
+                <Link href="/scripts/create" className={styles.button} style={{ width: 'auto', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <FontAwesomeIcon icon={faPlus} /> New Script
                 </Link>
             </div>
 
@@ -56,14 +58,14 @@ export default function ScriptsPage() {
                             </div>
 
                             <div style={{ marginTop: 'auto', display: 'flex', gap: '0.5rem' }}>
-                                <Link href={`/scripts/${script.id}`} className={styles.button} style={{ flex: 1, textAlign: 'center', fontSize: '0.875rem', padding: '0.5rem', textDecoration: 'none' }}>
-                                    Open
+                                <Link href={`/scripts/${script.id}`} className={styles.button} style={{ flex: 1, textAlign: 'center', fontSize: '0.875rem', padding: '0.5rem', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                                    <FontAwesomeIcon icon={faFolderOpen} /> Open
                                 </Link>
                                 <button
                                     onClick={() => handleDelete(script.id)}
-                                    style={{ background: 'transparent', border: '1px solid var(--surface-border)', color: '#ef4444', padding: '0.5rem', borderRadius: '8px', cursor: 'pointer' }}
+                                    style={{ background: 'transparent', border: '1px solid var(--surface-border)', color: '#ef4444', padding: '0.5rem', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                 >
-                                    🗑️
+                                    <FontAwesomeIcon icon={faTrash} />
                                 </button>
                             </div>
                         </div>

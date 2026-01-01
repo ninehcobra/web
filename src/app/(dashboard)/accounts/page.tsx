@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useGetAccountsQuery, useAddAccountMutation, useDeleteAccountMutation } from '@/data/api/accountsApi';
 import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import styles from '@/ui/ui.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink, faUnlink, faHashtag, faVideo, faCamera } from '@fortawesome/free-solid-svg-icons';
 
 export default function AccountsPage() {
     const { user } = useAppSelector((state) => state.auth);
@@ -73,8 +75,8 @@ export default function AccountsPage() {
                         />
                     </div>
 
-                    <button disabled={isAdding} className={styles.button} style={{ marginBottom: '2px' }}>
-                        {isAdding ? 'Linking...' : 'Link Account'}
+                    <button disabled={isAdding} className={styles.button} style={{ marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <FontAwesomeIcon icon={faLink} /> {isAdding ? 'Linking...' : 'Link Account'}
                     </button>
                 </form>
             </div>
@@ -94,11 +96,16 @@ export default function AccountsPage() {
                                     <img src={acc.avatar_url} alt={acc.username} style={{ width: '48px', height: '48px', borderRadius: '50%' }} />
                                     <div>
                                         <div style={{ fontWeight: 'bold', color: 'var(--text-primary)' }}>{acc.nickname || acc.username}</div>
-                                        <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>{acc.platform} • {acc.status}</div>
+                                        <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            {acc.platform === 'tiktok' && <FontAwesomeIcon icon={faHashtag} />}
+                                            {acc.platform === 'youtube' && <FontAwesomeIcon icon={faVideo} />}
+                                            {acc.platform === 'instagram' && <FontAwesomeIcon icon={faCamera} />}
+                                            {acc.platform} • {acc.status}
+                                        </div>
                                     </div>
                                 </div>
                                 <button onClick={() => handleDelete(acc.id)} style={{ padding: '0.5rem', background: 'transparent', border: '1px solid var(--surface-border)', color: '#ef4444', borderRadius: '8px', cursor: 'pointer' }}>
-                                    Unlink
+                                    <FontAwesomeIcon icon={faUnlink} /> Unlink
                                 </button>
                             </div>
                         ))}

@@ -4,6 +4,8 @@ import { useGetVideosQuery, useDeleteVideoMutation } from '@/data/api/videosApi'
 import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import styles from '@/ui/ui.module.css';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload, faTrash, faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function VideosPage() {
     const { user } = useAppSelector((state) => state.auth);
@@ -20,8 +22,8 @@ export default function VideosPage() {
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h1 className={styles.title} style={{ margin: 0 }}>My Videos</h1>
-                <Link href="/videos/upload" className={styles.button} style={{ width: 'auto', textDecoration: 'none' }}>
-                    📤 Upload Video
+                <Link href="/videos/upload" className={styles.button} style={{ width: 'auto', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <FontAwesomeIcon icon={faUpload} /> Upload Video
                 </Link>
             </div>
 
@@ -51,11 +53,11 @@ export default function VideosPage() {
                                         onClick={() => handleDelete(video.id)}
                                         style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer' }}
                                     >
-                                        🗑️
+                                        <FontAwesomeIcon icon={faTrash} />
                                     </button>
                                 </div>
-                                <button className={styles.button} style={{ fontSize: '0.875rem', padding: '0.5rem' }}>
-                                    Post to TikTok (Mock)
+                                <button className={styles.button} style={{ fontSize: '0.875rem', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                                    <FontAwesomeIcon icon={faShareFromSquare} /> Post to TikTok (Mock)
                                 </button>
                             </div>
                         </div>

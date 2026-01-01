@@ -1,5 +1,7 @@
 'use client';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import { supabase } from '@/data/supabaseClient';
 import styles from './ui.module.css';
@@ -21,10 +23,11 @@ export default function Topbar() {
             </div>
             <div className={styles.userSection}>
                 <div className={styles.userInfo}>
+                    <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }} />
                     <span className={styles.email}>{user?.email}</span>
                 </div>
-                <button onClick={handleLogout} className={styles.logoutBtn}>
-                    Sign Out
+                <button onClick={handleLogout} className={styles.logoutBtn} title="Sign Out">
+                    <FontAwesomeIcon icon={faRightFromBracket} />
                 </button>
             </div>
         </header>

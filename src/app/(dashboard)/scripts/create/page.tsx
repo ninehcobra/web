@@ -7,6 +7,8 @@ import { useGetProductsQuery } from '@/data/api/productsApi';
 import { useGenerateScriptMutation, useSaveScriptMutation } from '@/data/api/scriptsApi';
 import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import styles from '@/ui/ui.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWandMagicSparkles, faFloppyDisk, faBan } from '@fortawesome/free-solid-svg-icons';
 
 function CreateScriptForm() {
     const router = useRouter();
@@ -113,8 +115,13 @@ function CreateScriptForm() {
                     onClick={handleGenerate}
                     disabled={isGenerating || !selectedProductId}
                     className={styles.button}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                 >
-                    {isGenerating ? 'Generating with AI...' : '✨ Generate Script'}
+                    {isGenerating ? (
+                        'Generating with AI...'
+                    ) : (
+                        <><FontAwesomeIcon icon={faWandMagicSparkles} /> Generate Script</>
+                    )}
                 </button>
             </div>
 
@@ -136,11 +143,11 @@ function CreateScriptForm() {
                     </div>
 
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <button onClick={() => setGeneratedContent(null)} style={{ padding: '0.75rem', background: 'transparent', color: 'var(--text-secondary)', border: 'none', cursor: 'pointer' }}>
-                            Discard
+                        <button onClick={() => setGeneratedContent(null)} style={{ padding: '0.75rem', background: 'transparent', color: 'var(--text-secondary)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <FontAwesomeIcon icon={faBan} /> Discard
                         </button>
-                        <button onClick={handleSave} disabled={isSaving} className={styles.button} style={{ flex: 1, background: '#10b981' }}>
-                            {isSaving ? 'Saving...' : 'Save Script'}
+                        <button onClick={handleSave} disabled={isSaving} className={styles.button} style={{ flex: 1, background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                            <FontAwesomeIcon icon={faFloppyDisk} /> {isSaving ? 'Saving...' : 'Save Script'}
                         </button>
                     </div>
                 </div>

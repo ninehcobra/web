@@ -6,6 +6,8 @@ import { useAppSelector } from '@/presentation/hooks/reduxHooks';
 import ProductCard from '@/ui/ProductCard';
 import styles from '@/ui/ui.module.css';
 import { Product } from '@/domain/entities/Product';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductsPage() {
     const { user } = useAppSelector((state) => state.auth);
@@ -14,12 +16,7 @@ export default function ProductsPage() {
 
     // Hot finder state
     const [showHotFinder, setShowHotFinder] = useState(false);
-    // We trigger this query only when showing hot finder
-    // RTK Query doesn't support lazy query well with hooks unless we use useLazyQuery. 
-    // But useFindHotProductsQuery runs automatically. I'll use it conditionally or just let it cache.
-    // Actually, let's use the lazy version or just always fetch for demo.
-    // Better: useLazyFindHotProductsQuery if I exported it, but I didn't. I exported useFindHotProductsQuery.
-    // I will just use it and hide UI.
+
     const { data: hotProducts, isLoading: isHotLoading, refetch: refetchHot } = useFindHotProductsQuery(undefined, {
         skip: !showHotFinder,
     });
@@ -63,9 +60,13 @@ export default function ProductsPage() {
                 <button
                     className={styles.button}
                     onClick={() => setShowHotFinder(!showHotFinder)}
-                    style={{ width: 'auto' }}
+                    style={{ width: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
-                    {showHotFinder ? 'View My Products' : '🔥 Find Hot Products'}
+                    {showHotFinder ? (
+                        <>View My Products</>
+                    ) : (
+                        <><FontAwesomeIcon icon={faFire} /> Find Hot Products</>
+                    )}
                 </button>
             </div>
 
@@ -96,9 +97,9 @@ export default function ProductsPage() {
                             <p>No products saved yet.</p>
                             <button
                                 onClick={() => setShowHotFinder(true)}
-                                style={{ marginTop: '1rem', background: 'transparent', border: '1px solid var(--primary)', color: 'var(--primary)', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer' }}
+                                style={{ marginTop: '1rem', background: 'transparent', border: '1px solid var(--primary)', color: 'var(--primary)', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
                             >
-                                Find a Hot Product
+                                <FontAwesomeIcon icon={faMagnifyingGlass} /> Find a Hot Product
                             </button>
                         </div>
                     ) : (

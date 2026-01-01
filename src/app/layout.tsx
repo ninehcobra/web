@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Using Inter as a premium default
 import "./globals.css";
 import { Providers } from "@/presentation/providers";
+import FontAwesomeConfig from "@/ui/FontAwesomeConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <FontAwesomeConfig />
         <Providers>{children}</Providers>
       </body>
     </html>
